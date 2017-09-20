@@ -35,9 +35,8 @@ jobs:
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
         
       # Database setup
+      - environment: map[DATABASE_URL:postgres://ubuntu@localhost:5433/rails-studies_test]
       - run: bundle exec rake db:migrate
-        environment:
-          DATABASE_URL: "postgres://ubuntu@localhost:5433/rails-studies_test"
 
       # run tests!
       - run:

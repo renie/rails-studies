@@ -1,0 +1,6 @@
+git clone [URL]
+cd [clone-path]
+rails new . --database=postgresql
+rails db:migrate
+rails g scaffold Post title:string body:text
+rails db:migrate

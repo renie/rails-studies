@@ -26,8 +26,10 @@ jobs:
           name: Set up DB
           command: bundle exec rake db:migrate
           environment:
-              DATABASE_URL: "postgres://ubuntu@localhost:5432/rails-studies_test"
+            DATABASE_URL: "postgres://ubuntu@localhost:5432/rails-studies_test"
 
       - run:
           name: run tests
           command: rails t
+          environment:
+            DATABASE_URL: "postgres://ubuntu@localhost:5432/rails-studies_test"

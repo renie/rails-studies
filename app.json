@@ -1,6 +1,7 @@
 {
   "name": "rails-studies",
   "scripts": {
+    "postdeploy": "rake db:migrtate"
   },
   "env": {
     "LANG": {

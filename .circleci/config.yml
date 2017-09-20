@@ -16,34 +16,18 @@ jobs:
 
     steps:
       - checkout
-
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "Gemfile.lock" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
-
       - name: install dependencies
           command: |
             bundle install --jobs=4 --retry=3 --path vendor/bundle
 
-      - save_cache:
-          paths:
-            - ./vendor/bundle
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-        
-      # Database setup
       - name: Set up DB
+          command: bundle exec rake db:migrate
           environment:
             DATABASE_URL: "postgres://ubuntu@localhost:5433/rails-studies_test"
-          run: bundle exec rake db:migrate
 
-      # run tests!
       - name: run tests
           command: rails t
 
-      # collect reports
       - store_test_results:
           path: /tmp/test-results
       - store_artifacts:

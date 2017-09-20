@@ -8,6 +8,9 @@ jobs:
     docker:
       - image: circleci/ruby:2.4.1-node-browsers
       - image: circleci/postgres:9.5.6
+        environment:
+        - POSTGRES_USER=ubuntu
+        - POSTGRES_DB=rails-studies_test
 
     working_directory: ~/repo
 
@@ -33,6 +36,8 @@ jobs:
         
       # Database setup
       - run: bundle exec rake db:migrate
+        environment:
+          DATABASE_URL: "postgres://ubuntu@localhost:5433/rails-studies_test"
 
       # run tests!
       - run:

@@ -36,7 +36,7 @@ jobs:
         
       # Database setup
       - environment: map[DATABASE_URL:postgres://ubuntu@localhost:5433/rails-studies_test]
-      - run: bundle exec rake db:migrate
+        run: bundle exec rake db:migrate
 
       # run tests!
       - run:

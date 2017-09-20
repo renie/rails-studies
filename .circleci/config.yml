@@ -18,20 +18,20 @@ jobs:
       - checkout
 
       - name: install dependencies
-          command: |
+        command: |
             bundle install --jobs=4 --retry=3 --path vendor/bundle
 
       - name: Set up DB
-          command: bundle exec rake db:migrate
-          environment:
+        command: bundle exec rake db:migrate
+        environment:
             DATABASE_URL: "postgres://ubuntu@localhost:5433/rails-studies_test"
 
       - name: run tests
-          command: rails t
+        command: rails t
 
       - store_test_results:
-          path: /tmp/test-results
-          
+        path: /tmp/test-results
+
       - store_artifacts:
-          path: /tmp/test-results
-          destination: test-results
+        path: /tmp/test-results
+        destination: test-results

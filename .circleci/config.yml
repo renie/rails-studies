@@ -24,8 +24,7 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
-      - run:
-          name: install dependencies
+      - name: install dependencies
           command: |
             bundle install --jobs=4 --retry=3 --path vendor/bundle
 
@@ -35,12 +34,13 @@ jobs:
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
         
       # Database setup
-      - environment: map[DATABASE_URL:postgres://ubuntu@localhost:5433/rails-studies_test]
+      - name: Set up DB
+          environment:
+            DATABASE_URL: "postgres://ubuntu@localhost:5433/rails-studies_test"
           run: bundle exec rake db:migrate
 
       # run tests!
-      - run:
-          name: run tests
+      - name: run tests
           command: rails t
 
       # collect reports
